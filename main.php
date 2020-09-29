@@ -3,8 +3,8 @@
 Plugin Name: staff role widget
 Plugin URI: http://www.example.com/plugin
 Description: 画像つきカスタムウィジェットを登録
-Author: tailtension
-Version: 0.1
+Author: izumogawa
+Version: 0.12
 Author URI: http://www.example.com
 */
 
@@ -15,7 +15,7 @@ $dir = get_template_directory();
 add_action( 'widgets_init', function () {
 	register_widget( 'My_Widget' );  //WidgetをWordPressに登録する
   register_sidebar( array(  //「サイドバー」を登録する
-		'name'          => 'OUR TEAM 1',
+		'name'          => 'OUR TOURS 1',
 		'id'            => 'my_sidebar_1',
 		'before_widget' => '<div>',
 		'after_widget'  => '</div>',
@@ -23,7 +23,7 @@ add_action( 'widgets_init', function () {
 		'after_title'   => '',
   ) );
   register_sidebar( array(  //「サイドバー」を登録する
-		'name'          => 'OUR TEAM 2',
+		'name'          => 'OUR TOURS 2',
 		'id'            => 'my_sidebar_2',
 		'before_widget' => '<div class="">',
 		'after_widget'  => '</div>',
@@ -31,7 +31,7 @@ add_action( 'widgets_init', function () {
 		'after_title'   => '',
   ) );
   register_sidebar( array(  //「サイドバー」を登録する
-		'name'          => 'OUR TEAM 3',
+		'name'          => 'OUR TOURS 3',
 		'id'            => 'my_sidebar_3',
 		'before_widget' => '<div>',
 		'after_widget'  => '</div>',
@@ -39,7 +39,7 @@ add_action( 'widgets_init', function () {
 		'after_title'   => '',
   ) );
   register_sidebar( array(  //「サイドバー」を登録する
-		'name'          => 'OUR TEAM 4',
+		'name'          => 'OUR TOURS 4',
 		'id'            => 'my_sidebar_4',
 		'before_widget' => '<div>',
 		'after_widget'  => '</div>',
@@ -58,8 +58,8 @@ class My_Widget extends WP_Widget{
 	function __construct() {
 		parent::__construct(
 			'my_widget', // Base ID
-			'スタッフ画像', // Name
-			array( 'description' => 'スタッフの紹介', ) // Args
+			'ツアー画像', // Name
+			array( 'description' => 'ツアーの紹介', ) // Args
 		);
 	}
 
@@ -76,14 +76,14 @@ class My_Widget extends WP_Widget{
     $team_rol = $instance['team_rol'];
 		echo $args['before_widget'];
 
-        echo '<img width="270" height="270" src="',$uri,'/images/',$team_img,'" alt=""/></a> ';
-        echo '
+				echo '<figure>
+					<img src="',$uri,'/images/',$team_img,'" alt=""/>
+				</figure>
         <div class="thumbnail-desc">
-        <h5 class="thumbnail-josip-title text-bold text-white">',$team_name,'</h5>
-        <p class="d-none d-lg-block text-italic text-white offset-top-0">',$team_rol,'</p>
-      </div>
-      <figcaption><a class="btn-java btn btn-block btn-rect text-lg-left" href="team-member.html">view full profile</a></figcaption>
-     ';
+					<h5 class="thumbnail-josip">',$team_name,'</h5>
+					<p class="d-none">',$team_rol,'</p>
+        </div>
+       ';
 
         echo $args['after_widget'];
 	}
@@ -107,15 +107,15 @@ class My_Widget extends WP_Widget{
         $team_rol_id = $this->get_field_id('team_rol');
  ?>
         <p>
-            <label for="<?php echo $team_img_id; ?>">スタッフ顔写真:</label>
+            <label for="<?php echo $team_img_id; ?>">ツアー写真:</label>
             <input class="widefat" id="<?php echo $team_img_id; ?>" name="<?php echo $team_img_name; ?>" type="text" value="<?php echo esc_attr( $team_img ); ?>">
         </p>
         <p>
-            <label for="<?php echo $team_name_id; ?>">スタッフ名:</label>
+            <label for="<?php echo $team_name_id; ?>">ツアー名:</label>
             <input class="widefat" id="<?php echo $team_name_id; ?>" name="<?php echo $team_name_name; ?>" type="text" value="<?php echo esc_attr( $team_name ); ?>">
         </p>
         <p>
-            <label for="<?php echo $team_rol_id; ?>">役割,部署:</label>
+            <label for="<?php echo $team_rol_id; ?>">そそるキャッチ:</label>
             <input class="widefat" id="<?php echo $team_rol_id; ?>" name="<?php echo $team_rol_name; ?>" type="text" value="<?php echo esc_attr( $team_rol ); ?>">
         </p>
  <?php
@@ -132,6 +132,7 @@ class My_Widget extends WP_Widget{
         if(empty($new_instance['team_img']) 
         || empty($new_instance['team_name'])
         || empty($new_instance['team_rol'])){
+            echo "Error";
             return false;
         }
         return $new_instance;
