@@ -74,13 +74,15 @@ class My_Widget extends WP_Widget{
     $team_img = $instance['team_img'];
     $team_name = $instance['team_name'];
     $team_rol = $instance['team_rol'];
+    $team_url = $instance['team_url'];
 		echo $args['before_widget'];
 
-        echo '<img width="270" height="270" src="',$uri,'/images/',$team_img,'" alt=""/> 
+        echo '<a href="',$team_url,'">
+        <img width="270" height="270" src="',$uri,'/images/',$team_img,'" alt=""/> 
         <div class="thumbnail-desc">
-        <h5 class="thumbnail-josip-title text-bold text-white">',$team_name,'</h5>
-        <p class="d-lg-block text-italic">',$team_rol,'</p>
-      </div>
+            <h5 class="thumbnail-josip-title text-bold text-white">',$team_name,'</h5>
+            <p class="d-lg-block text-italic">',$team_rol,'</p>
+        </div></a>
      ';
 
         echo $args['after_widget'];
@@ -103,6 +105,10 @@ class My_Widget extends WP_Widget{
         $team_rol = @$instance['team_rol'];
         $team_rol_name = $this->get_field_name('team_rol');
         $team_rol_id = $this->get_field_id('team_rol');
+
+        $team_url = @$instance['team_url'];
+        $team_url_name = $this->get_field_name('team_url');
+        $team_url_id = $this->get_field_id('team_url');
  ?>
         <p>
             <label for="<?php echo $team_img_id; ?>">スタッフ顔写真:</label>
@@ -115,6 +121,10 @@ class My_Widget extends WP_Widget{
         <p>
             <label for="<?php echo $team_rol_id; ?>">役割,部署:</label>
             <input class="widefat" id="<?php echo $team_rol_id; ?>" name="<?php echo $team_rol_name; ?>" type="text" value="<?php echo esc_attr( $team_rol ); ?>">
+        </p>
+        <p>
+            <label for="<?php echo $team_url_id; ?>">リンク先URL:</label>
+            <input class="widefat" id="<?php echo $team_url_id; ?>" name="<?php echo $team_url_name; ?>" type="text" value="<?php echo esc_attr( $team_url ); ?>">
         </p>
  <?php
     }
@@ -129,7 +139,9 @@ class My_Widget extends WP_Widget{
     function update($new_instance, $old_instance) {
         if(empty($new_instance['team_img']) 
         || empty($new_instance['team_name'])
-        || empty($new_instance['team_rol'])){
+        || empty($new_instance['team_rol'])
+        || empty($new_instance['team_url'])
+        ){
             return false;
         }
         return $new_instance;
