@@ -17,7 +17,7 @@ add_action( 'widgets_init', function () {
   register_sidebar( array(  //「サイドバー」を登録する
 		'name'          => 'OUR TEAM 1',
 		'id'            => 'my_sidebar_1',
-		'before_widget' => '<div>',
+		'before_widget' => '<div class="team">',
 		'after_widget'  => '</div>',
 		'before_title'  => '',
 		'after_title'   => '',
@@ -25,7 +25,7 @@ add_action( 'widgets_init', function () {
   register_sidebar( array(  //「サイドバー」を登録する
 		'name'          => 'OUR TEAM 2',
 		'id'            => 'my_sidebar_2',
-		'before_widget' => '<div class="">',
+		'before_widget' => '<div class="team">',
 		'after_widget'  => '</div>',
 		'before_title'  => '',
 		'after_title'   => '',
@@ -33,7 +33,7 @@ add_action( 'widgets_init', function () {
   register_sidebar( array(  //「サイドバー」を登録する
 		'name'          => 'OUR TEAM 3',
 		'id'            => 'my_sidebar_3',
-		'before_widget' => '<div>',
+		'before_widget' => '<div class="team">',
 		'after_widget'  => '</div>',
 		'before_title'  => '',
 		'after_title'   => '',
@@ -41,7 +41,7 @@ add_action( 'widgets_init', function () {
   register_sidebar( array(  //「サイドバー」を登録する
 		'name'          => 'OUR TEAM 4',
 		'id'            => 'my_sidebar_4',
-		'before_widget' => '<div>',
+		'before_widget' => '<div class="team">',
 		'after_widget'  => '</div>',
 		'before_title'  => '',
 		'after_title'   => '',
@@ -76,13 +76,11 @@ class My_Widget extends WP_Widget{
     $team_rol = $instance['team_rol'];
 		echo $args['before_widget'];
 
-        echo '<img width="270" height="270" src="',$uri,'/images/',$team_img,'" alt=""/></a> ';
-        echo '
+        echo '<img width="270" height="270" src="',$uri,'/images/',$team_img,'" alt=""/> 
         <div class="thumbnail-desc">
         <h5 class="thumbnail-josip-title text-bold text-white">',$team_name,'</h5>
-        <p class="d-none d-lg-block text-italic text-white offset-top-0">',$team_rol,'</p>
+        <p class="d-lg-block text-italic">',$team_rol,'</p>
       </div>
-      <figcaption><a class="btn-java btn btn-block btn-rect text-lg-left" href="team-member.html">view full profile</a></figcaption>
      ';
 
         echo $args['after_widget'];
